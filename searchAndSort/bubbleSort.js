@@ -3,7 +3,6 @@ function bubbleSort(arr) {
   for (let i = 0; i < arr.length; i++) {
     let isSwapping = false;
     for (let k = 0; k < n - 1 - i; k++) {
-      console.log(i, "I value");
       let temp = arr[k];
       if (arr[k] > arr[k + 1]) {
         isSwapping = true;
@@ -19,6 +18,6 @@ function bubbleSort(arr) {
   return arr;
 }
 
-let arr = [1, 2, 3, 4, 5, 6];
+let arr = [5, 1, 1, 2, 0, 0];
 
 console.log(bubbleSort(arr));
