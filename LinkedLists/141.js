@@ -72,7 +72,9 @@ class LinkedList {
 
   checkCycle() {
     let curr = this.head;
-
+    if (this.head === null) {
+      return fasle;
+    }
     let set = new Set();
     while (curr) {
       if (set.has(curr)) {
@@ -83,6 +85,24 @@ class LinkedList {
     }
     return false;
   }
+
+  checkFloydsCycle() {
+    let slow = this.head;
+    let fast = this.head.next;
+    if (this.head === null) {
+      return fasle;
+    }
+    while (slow !== fast) {
+      if (fast === null || fast.next === null) {
+        return false;
+      }
+
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    return true;
+  }
 }
 
 const ll = new LinkedList();
@@ -92,5 +112,6 @@ ll.addToTail(2);
 ll.addToTail(3);
 ll.addToTail(4);
 ll.addToTail(5);
+ll.addCycle(2);
 
-console.log(ll.checkCycle());
+console.log(ll.checkFloydsCycle());
