@@ -118,21 +118,46 @@ class LinkedList {
     }
     return res;
   }
+
+  removeElement(val) {
+    if (this.head === null) {
+      return null;
+    }
+
+    let newNode = new Node(0);
+    newNode.next = this.head;
+    let prev = newNode;
+    while (prev && prev.next) {
+      if (prev.next.value === val) {
+        prev.next = prev.next.next;
+      } else {
+        prev = prev.next;
+      }
+    }
+
+    this.head = newNode.next;
+  }
 }
 
 const ll = new LinkedList();
-ll.addToHead(11);
+// ll.addToHead(11);
+// ll.addToHead(1);
 ll.addToHead(1);
-ll.addToHead(10);
+ll.addToTail(2);
+ll.addToTail(6);
+ll.addToTail(3);
+ll.addToTail(4);
 ll.addToTail(5);
-ll.addToTail(15);
-ll.addToIndex(2, 0);
-ll.addToIndex(2, 2);
-
+ll.addToTail(6);
+// ll.addToTail(15);
+// ll.addToIndex(2, 0);
+// ll.addToIndex(2, 2);
+console.log(ll.print());
+ll.removeElement(6);
 console.log(ll.print());
 
-ll.deleteNodeByIndex(6);
-ll.deleteNodeByIndex(0);
+// ll.deleteNodeByIndex(6);
+// ll.deleteNodeByIndex(0);
 
-console.log(ll.print());
-console.log(ll.getElementByIndex(1));
+// console.log(ll.print());
+// console.log(ll.getElementByIndex(1));
