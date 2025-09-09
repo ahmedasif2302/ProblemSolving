@@ -190,15 +190,30 @@ class LinkedList {
 
     this.head = sentinel.next;
   }
+
+  removeDuplicates2() {
+    if (this.head === null) {
+      return null;
+    }
+    let curr = this.head;
+    while (curr && curr.next) {
+      if (curr.value === curr.next.value) {
+        curr.next = curr.next.next;
+      } else {
+        curr = curr.next;
+      }
+    }
+  }
 }
 
 const ll = new LinkedList();
 ll.addToHead(1);
 ll.addToTail(1);
 ll.addToTail(2);
+ll.addToTail(2);
 
 console.log(ll.print());
 
-ll.removeDuplicates();
+ll.removeDuplicates2();
 
 console.log(ll.print());

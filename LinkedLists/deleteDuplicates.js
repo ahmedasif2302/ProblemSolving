@@ -31,3 +31,17 @@ var deleteDuplicates = function (head) {
 
   return sentinel.next;
 };
+
+function removeDuplicates2() {
+  if (this.head === null) {
+    return null;
+  }
+  let curr = this.head;
+  while (curr && curr.next) {
+    if (curr.value === curr.next.value) {
+      curr.next = curr.next.next;
+    } else {
+      curr = curr.next;
+    }
+  }
+}
