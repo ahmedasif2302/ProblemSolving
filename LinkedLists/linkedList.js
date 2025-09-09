@@ -137,27 +137,68 @@ class LinkedList {
 
     this.head = newNode.next;
   }
+
+  removeNthNode(n) {
+    if (this.head === null) {
+      return null;
+    }
+
+    let sentinel = new Node(0);
+    sentinel.next = this.head;
+    let curr = sentinel;
+    let s = sentinel;
+    let f = null;
+    let i = 0;
+    while (curr) {
+      if (i === n) {
+        f = curr;
+        break;
+      }
+      curr = curr.next;
+      i++;
+    }
+
+    while (f && f.next) {
+      s = s.next;
+      f = f.next;
+    }
+
+    s.next = s.next.next;
+
+    this.head = sentinel.next;
+  }
+
+  removeDuplicates() {
+    if (this.head === null) {
+      return null;
+    }
+    let seenNodes = new Set();
+    let sentinel = new Node(0);
+    sentinel.next = this.head;
+    let prev = sentinel;
+
+    while (prev.next) {
+      if (seenNodes.has(prev.next.value)) {
+        // Duplicate → skip node
+        prev.next = prev.next.next;
+      } else {
+        // Not duplicate → add value and move forward
+        seenNodes.add(prev.next.value);
+        prev = prev.next;
+      }
+    }
+
+    this.head = sentinel.next;
+  }
 }
 
 const ll = new LinkedList();
-// ll.addToHead(11);
-// ll.addToHead(1);
 ll.addToHead(1);
+ll.addToTail(1);
 ll.addToTail(2);
-ll.addToTail(6);
-ll.addToTail(3);
-ll.addToTail(4);
-ll.addToTail(5);
-ll.addToTail(6);
-// ll.addToTail(15);
-// ll.addToIndex(2, 0);
-// ll.addToIndex(2, 2);
-console.log(ll.print());
-ll.removeElement(6);
+
 console.log(ll.print());
 
-// ll.deleteNodeByIndex(6);
-// ll.deleteNodeByIndex(0);
+ll.removeDuplicates();
 
-// console.log(ll.print());
-// console.log(ll.getElementByIndex(1));
+console.log(ll.print());
