@@ -204,16 +204,36 @@ class LinkedList {
       }
     }
   }
+
+  oddOrEvenNodes() {
+    if (this.head === null) {
+      return null;
+    }
+    let odd = this.head;
+    let even = this.head.next;
+    let evenStart = even;
+    while (odd.next && even.next) {
+      odd.next = odd.next.next;
+      even.next = even.next.next;
+      odd = odd.next;
+      even = even.next;
+    }
+
+    odd.next = evenStart;
+  }
 }
 
 const ll = new LinkedList();
-ll.addToHead(1);
+ll.addToHead(2);
 ll.addToTail(1);
-ll.addToTail(2);
-ll.addToTail(2);
+ll.addToTail(3);
+ll.addToTail(5);
+ll.addToTail(6);
+ll.addToTail(4);
+ll.addToTail(7);
 
 console.log(ll.print());
 
-ll.removeDuplicates2();
+ll.oddOrEvenNodes();
 
 console.log(ll.print());
