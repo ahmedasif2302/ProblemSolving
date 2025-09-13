@@ -222,26 +222,58 @@ class LinkedList {
     odd.next = evenStart;
   }
 
-  addTwoNumbers() {}
+  rototeList(k) {
+    if (!this.head) {
+      return this.head;
+    }
+
+    let curr = this.head;
+
+    for (let i = 0; i < k; i++) {
+      let s = curr;
+      let f = curr.next;
+      while (f && f.next) {
+        s = s.next;
+        f = f.next;
+      }
+
+      if (!f) {
+        return curr;
+      }
+
+      f.next = curr;
+      s.next = null;
+      curr = f;
+    }
+
+    this.head = curr;
+  }
 }
 
-const l1 = new LinkedList();
-const l2 = new LinkedList();
+const ll = new LinkedList();
 
-l1.addToHead(9);
-l1.addToTail(9);
-l1.addToTail(9);
-l1.addToTail(9);
-l1.addToTail(9);
-l1.addToTail(9);
-l1.addToTail(9);
+ll.addToHead(1);
+// ll.addToTail(2);
+// ll.addToTail(3);
+// ll.addToTail(4);
+// ll.addToTail(5);
 
-l2.addToTail(9);
-l2.addToTail(9);
-l2.addToTail(9);
-l2.addToTail(9);
+ll.rototeList(1);
 
-addTwoNumbers(l1.head, l2.head);
+console.log(ll.print());
+
+// const l1 = new LinkedList();
+// const l2 = new LinkedList();
+
+// l1.addToHead(1);
+// l1.addToTail(2);
+// l1.addToTail(4);
+
+// l2.addToTail(1);
+// l2.addToTail(3);
+// l2.addToTail(4);
+
+// addTwoNumbers(l1.head, l2.head);
 
 function addTwoNumbers(l1, l2) {
   let curr1 = l1;
@@ -265,4 +297,38 @@ function addTwoNumbers(l1, l2) {
   }
 
   console.log(res.print());
+}
+
+// mergeTwoSortedList(l1.head, l2.head);
+
+function mergeTwoSortedList(l1, l2) {
+  let start = new Node();
+  let curr = start;
+  while (l1 && l2) {
+    if (l1.value < l2.value) {
+      curr.next = l1;
+      l1 = l1 && l1.next;
+    } else {
+      curr.next = l2;
+      l2 = l2 && l2.next;
+    }
+    curr = curr.next;
+  }
+
+  if (!l1) {
+    curr.next = l2;
+  }
+
+  if (!l2) {
+    curr.next = l1;
+  }
+
+  let res = start.next;
+  let print = "";
+  while (res) {
+    print = print + `${res.value},`;
+    res = res.next;
+  }
+
+  console.log(print);
 }
