@@ -38,28 +38,36 @@ var rotateRightLegacy = function (head, k) {
 };
 
 var rotateRightOptimised = function (head, k) {
-  if (!head) {
-    return head;
+  if (!this.head) {
+    return this.head;
+  }
+  let curr = this.head;
+
+  let len = 0;
+  while (curr) {
+    curr = curr.next;
+    len++;
   }
 
-  let curr = head;
+  curr = this.head;
 
+  k = k % len;
+
+  let s = this.head;
+  let f = null;
+  console.log(k);
   for (let i = 0; i < k; i++) {
-    let s = curr;
-    let f = curr.next;
-    while (f && f.next) {
-      s = s.next;
-      f = f.next;
-    }
-
-    if (!f) {
-      return curr;
-    }
-
-    f.next = curr;
-    s.next = null;
-    curr = f;
+    curr = curr.next;
+    f = curr;
   }
 
-  return curr;
+  while (f.next) {
+    f = f.next;
+    s = s.next;
+  }
+  let newHead = s.next;
+  s.next = null;
+  f.next = this.head;
+
+  this.head = newHead;
 };
