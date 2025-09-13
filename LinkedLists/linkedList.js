@@ -221,19 +221,48 @@ class LinkedList {
 
     odd.next = evenStart;
   }
+
+  addTwoNumbers() {}
 }
 
-const ll = new LinkedList();
-ll.addToHead(2);
-ll.addToTail(1);
-ll.addToTail(3);
-ll.addToTail(5);
-ll.addToTail(6);
-ll.addToTail(4);
-ll.addToTail(7);
+const l1 = new LinkedList();
+const l2 = new LinkedList();
 
-console.log(ll.print());
+l1.addToHead(9);
+l1.addToTail(9);
+l1.addToTail(9);
+l1.addToTail(9);
+l1.addToTail(9);
+l1.addToTail(9);
+l1.addToTail(9);
 
-ll.oddOrEvenNodes();
+l2.addToTail(9);
+l2.addToTail(9);
+l2.addToTail(9);
+l2.addToTail(9);
 
-console.log(ll.print());
+addTwoNumbers(l1.head, l2.head);
+
+function addTwoNumbers(l1, l2) {
+  let curr1 = l1;
+  let curr2 = l2;
+
+  const res = new LinkedList();
+  let carry = 0;
+  while (curr1 || curr2 || carry) {
+    let a = curr1?.value ?? 0;
+    let b = curr2?.value ?? 0;
+    let sum = a + b + carry;
+    carry = Math.floor(sum / 10);
+    let digit = sum % 10;
+    if (res.head === null) {
+      res.addToHead(digit);
+    } else {
+      res.addToTail(digit);
+    }
+    curr1 = curr1 && curr1?.next;
+    curr2 = curr2 && curr2?.next;
+  }
+
+  console.log(res.print());
+}
