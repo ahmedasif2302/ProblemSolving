@@ -21,3 +21,8 @@ var mergeTwoPointer = function (nums1, m, nums2, n) {
   }
   return nums1;
 };
+
+let nums1 = [1, 2, 3, 0, 0, 0];
+let nums2 = [2, 5, 6];
+
+console.log(mergeTwoPointer(nums1, 3, nums2, 3));
