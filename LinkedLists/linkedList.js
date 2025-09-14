@@ -283,6 +283,27 @@ class LinkedList {
 
     this.head = newHead;
   }
+
+  swapTwoNodes() {
+    if (!this.head || !this.head.next) {
+      return this.head;
+    }
+    let sentinel = new Node(0);
+    sentinel.next = this.head;
+    let p = sentinel;
+    let c = this.head;
+    let n = this.head.next;
+    while (c && n) {
+      p.next = n;
+      c.next = n.next;
+      n.next = c;
+      p = c;
+      c = p.next;
+      n = c && c.next;
+    }
+
+    this.head = sentinel.next;
+  }
 }
 
 const ll = new LinkedList();
@@ -292,8 +313,9 @@ ll.addToTail(2);
 ll.addToTail(3);
 ll.addToTail(4);
 ll.addToTail(5);
+ll.addToTail(6);
 
-ll.rototeListOptimised(2);
+ll.swapTwoNodes();
 console.log(ll.print());
 
 // const l1 = new LinkedList();
